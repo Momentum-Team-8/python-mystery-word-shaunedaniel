@@ -1,21 +1,41 @@
 import random
 
-with open("words.txt", 'r') as w:
-    allText = w.read()
+print("Welcome to hangman!")
 
 
-def gamePrompt():
-    words = list(map(str, allText.split()))
-    word = (random.choice(words))
-    # for letter of words:
-    wordLetters = list(word)
-    wordLength = (len(wordLetters))
-    print(wordLength)
-
-    # if letters ==
-
-    # input("Your guess: ")
-    # word_selection = "_" * len(words)
+def get_word():
+    words = ["cat", "dogs", "buttcrack"]
+    return random.choice(words)
 
 
-gamePrompt()
+def game():
+    word = get_word()
+    word_list = []
+    tries = 8
+    print("This word has ", len(word), " letters.")
+    yourmomma = (len(word) * "_ ")
+    print(yourmomma)
+
+    while tries > 0:
+        correct_guesses = []
+        incorrect_guesses = []
+        letters_guessed = []
+        guess = input("Your guess is ")
+        if guess not in word:
+            tries -= 1
+            print("Sorry. Not a valid letter. You have " +
+                  str(tries) + " tries")
+        for x in word_list:
+            if guess == x:
+                letters_guessed.append(guess)
+                correct_guesses.append(guess)
+            elif x in correct_guesses:
+                letters_guessed.append(x)
+            else:
+                letters_guessed.append("_")
+                incorrect_guesses.append(guess)
+
+            print(letters_guessed)
+
+
+game()
